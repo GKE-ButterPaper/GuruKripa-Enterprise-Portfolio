@@ -42,9 +42,10 @@ const images = [];
 const boppImages = [];
 let loadedCount = 0;
 let isLoaded = false;
+let boppLastImg1, boppLastImg2;
 
-// Total images to load in preloader
-const GLOBAL_TOTAL_IMAGES = TOTAL_FRAMES + BOPP_TOTAL_FRAMES;
+// Total images to load in preloader (includes 2 final custom BOPP showcase images)
+const GLOBAL_TOTAL_IMAGES = TOTAL_FRAMES + BOPP_TOTAL_FRAMES + 2;
 
 // Scroll & Lerp variables for main Butter Paper animation
 let scrollPercent = 0;
@@ -100,6 +101,17 @@ const preloadImages = () => {
       img.src = filename;
       boppImages[i] = img;
     }
+
+    // 3. Preload Final Custom BOPP Showcase Images
+    boppLastImg1 = new Image();
+    boppLastImg1.onload = onImageLoaded;
+    boppLastImg1.onerror = () => onImageError('./bopp-last-1.jpg');
+    boppLastImg1.src = './bopp-last-1.jpg';
+
+    boppLastImg2 = new Image();
+    boppLastImg2.onload = onImageLoaded;
+    boppLastImg2.onerror = () => onImageError('./bopp-last-2.jpg');
+    boppLastImg2.src = './bopp-last-2.jpg';
   });
 };
 
@@ -166,6 +178,55 @@ const drawFrame = (frameIndex) => {
 const drawBoppFrame = (frameIndex) => {
   if (!boppCanvas || !boppCtx) return;
   const index = Math.min(BOPP_TOTAL_FRAMES - 1, Math.max(0, Math.round(frameIndex - BOPP_START_FRAME)));
+  
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  boppCanvas.width = w;
+  boppCanvas.height = h;
+
+  // Check if we are rendering the very last frame (index 195, corresponding to frame 201)
+  if (index === BOPP_TOTAL_FRAMES - 1 && boppLastImg1 && boppLastImg2 && boppLastImg1.complete && boppLastImg2.complete) {
+    boppCtx.clearRect(0, 0, w, h);
+    
+    // Responsive: side-by-side on desktop, stacked on mobile
+    if (w > 768) {
+      // DESKTOP: Side-by-side split screen
+      const halfW = w / 2;
+      
+      // Left half: draw boppLastImg1 (WhatsApp Image 1)
+      drawCoverImage(boppCtx, boppLastImg1, 0, 0, halfW, h);
+      
+      // Right half: draw boppLastImg2 (WhatsApp Image 2)
+      drawCoverImage(boppCtx, boppLastImg2, halfW, 0, halfW, h);
+      
+      // Elegant vertical glassmorphic divider
+      boppCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      boppCtx.lineWidth = 4;
+      boppCtx.beginPath();
+      boppCtx.moveTo(halfW, 0);
+      boppCtx.lineTo(halfW, h);
+      boppCtx.stroke();
+    } else {
+      // MOBILE: Stacked vertically
+      const halfH = h / 2;
+      
+      // Top half: draw boppLastImg1 (WhatsApp Image 1)
+      drawCoverImage(boppCtx, boppLastImg1, 0, 0, w, halfH);
+      
+      // Bottom half: draw boppLastImg2 (WhatsApp Image 2)
+      drawCoverImage(boppCtx, boppLastImg2, 0, halfH, w, halfH);
+      
+      // Elegant horizontal glassmorphic divider
+      boppCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      boppCtx.lineWidth = 4;
+      boppCtx.beginPath();
+      boppCtx.moveTo(0, halfH);
+      boppCtx.lineTo(w, halfH);
+      boppCtx.stroke();
+    }
+    return;
+  }
+
   let img = boppImages[index];
   
   // High-performance complete-frame rendering fallback to prevent flickering
@@ -187,12 +248,6 @@ const drawBoppFrame = (frameIndex) => {
     }
     if (!found) return; // Wait until at least one frame is loaded
   }
-
-  // Size canvas dynamically to fit parent viewport
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  boppCanvas.width = w;
-  boppCanvas.height = h;
 
   // Perform "object-fit: cover" calculations for Canvas rendering
   const imgWidth = img.naturalWidth || img.width || 1280;
@@ -220,6 +275,32 @@ const drawBoppFrame = (frameIndex) => {
   // Clear canvas and draw new centered frame
   boppCtx.clearRect(0, 0, w, h);
   boppCtx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+};
+
+// Helper function to draw an image covering a sub-rectangle on the canvas (object-fit: cover)
+const drawCoverImage = (context, img, dx, dy, dw, dh) => {
+  const imgWidth = img.naturalWidth || img.width;
+  const imgHeight = img.naturalHeight || img.height;
+  const imgRatio = imgWidth / imgHeight;
+  const destRatio = dw / dh;
+  
+  let sx, sy, sw, sh;
+  
+  if (destRatio > imgRatio) {
+    // Destination is wider than image aspect ratio, crop height
+    sw = imgWidth;
+    sh = imgWidth / destRatio;
+    sx = 0;
+    sy = (imgHeight - sh) / 2;
+  } else {
+    // Destination is taller than image aspect ratio, crop width
+    sh = imgHeight;
+    sw = imgHeight * destRatio;
+    sx = (imgWidth - sw) / 2;
+    sy = 0;
+  }
+  
+  context.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 };
 
 // 7. Scroll Position Tracking & UI Sync

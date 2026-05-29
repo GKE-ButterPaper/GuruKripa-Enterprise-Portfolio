@@ -159,7 +159,10 @@
       </div>
       
       <!-- Action button / Hamburger -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <a href="/GURU_KRIPA_ENTERPRISES_Product_Catalogue.pdf" target="_blank" class="hidden md:inline-flex bg-white/10 hover:bg-white/20 border border-white/20 text-white text-label-md font-label-md font-bold px-6 py-2.5 rounded-full transition-all duration-300 active:scale-95 shadow-md">
+          View Portfolio
+        </a>
         <a href="#contact" class="hidden md:inline-flex bg-primary hover:bg-surface-tint text-on-primary text-label-md font-label-md font-bold px-6 py-2.5 rounded-full transition-all duration-300 active:scale-95 shadow-md">
           Contact Us
         </a>
@@ -175,7 +178,10 @@
       <a href="#features" onclick="closeMobileMenu();" class="text-on-surface hover:text-primary transition-colors text-body-lg font-semibold py-2">Features</a>
       <a href="#use-cases" onclick="closeMobileMenu();" class="text-on-surface hover:text-primary transition-colors text-body-lg font-semibold py-2">Use Cases</a>
       <a href="#products" onclick="closeMobileMenu();" class="text-on-surface hover:text-primary transition-colors text-body-lg font-semibold py-2">Other Products</a>
-      <a href="#contact" onclick="closeMobileMenu();" class="bg-primary hover:bg-surface-tint text-on-primary text-center text-label-md font-bold py-3 rounded-full mt-2">
+      <a href="/GURU_KRIPA_ENTERPRISES_Product_Catalogue.pdf" target="_blank" onclick="closeMobileMenu();" class="border border-primary hover:bg-primary/10 text-primary text-center text-label-md font-bold py-3 rounded-full mt-2">
+        View Portfolio
+      </a>
+      <a href="#contact" onclick="closeMobileMenu();" class="bg-primary hover:bg-surface-tint text-on-primary text-center text-label-md font-bold py-3 rounded-full">
         Contact Us
       </a>
     </div>
@@ -314,6 +320,21 @@
         </div>
       </section>
 
+      <!-- Aluminium Foil Box Cinematic Scroll Showcase -->
+      <section class="foil-scroll-bounds" id="foil-showcase">
+        <div class="foil-canvas-container">
+          <canvas id="foil-canvas"></canvas>
+          <div class="foil-radial-vignette"></div>
+          
+          <!-- Sync text captions driven by scrolling progress -->
+          <div class="foil-text-overlay">
+            <h2 id="foil-text-1" class="foil-title">Premium Aluminium Foil</h2>
+            <h2 id="foil-text-2" class="foil-title">Extra Thick 10/11 Micron</h2>
+            <h2 id="foil-text-3" class="foil-title">Superior Heat &amp; Freshness</h2>
+          </div>
+        </div>
+      </section>
+
       <!-- Product Catalog Section -->
       <section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-primary text-on-primary relative overflow-hidden" id="products">
         <!-- Decorative background pattern -->
@@ -330,16 +351,18 @@
               Beyond our signature Butter Paper, Guru Kripa Enterprises is your trusted manufacturer and wholesale partner for a comprehensive suite of premium, commercial-grade packaging materials. Sourced and printed to maximize B2B profit margins.
             </p>
           </div>
-
           <!-- Product Showcase Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-16">
             <!-- BOPP Films -->
-            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
               <div>
-                <div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center mb-6 text-primary-fixed group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-symbols-outlined text-[24px]">layers</span>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mb-6 bg-black/20">
+                  <img src="/bopp_film_card.png" alt="BOPP Packaging Films" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                  <div class="absolute top-3 left-3 w-10 h-10 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center text-primary-fixed">
+                    <span class="material-symbols-outlined text-[20px]">layers</span>
+                  </div>
                 </div>
-                <h3 class="text-headline-sm font-headline-md text-white mb-4">BOPP Packaging Films</h3>
+                <h3 class="text-headline-sm font-headline-md text-white mb-3">BOPP Packaging Films</h3>
                 <p class="text-body-md font-body-md text-primary-fixed/80 leading-relaxed mb-6">
                   High-tensile strength and crystal clarity make our BOPP films the ultimate choice for retail presentation and preservation.
                 </p>
@@ -361,12 +384,15 @@
             </div>
 
             <!-- Aluminium Foil -->
-            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
               <div>
-                <div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center mb-6 text-primary-fixed group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-symbols-outlined text-[24px]">kitchen</span>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mb-6 bg-black/20">
+                  <img src="/aluminium_foil_card.png" alt="Premium Aluminium Foil" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                  <div class="absolute top-3 left-3 w-10 h-10 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center text-primary-fixed">
+                    <span class="material-symbols-outlined text-[20px]">kitchen</span>
+                  </div>
                 </div>
-                <h3 class="text-headline-sm font-headline-md text-white mb-4">Premium Aluminium Foil</h3>
+                <h3 class="text-headline-sm font-headline-md text-white mb-3">Premium Aluminium Foil</h3>
                 <p class="text-body-md font-body-md text-primary-fixed/80 leading-relaxed mb-6">
                   Heavy-duty, high-heat tolerance foil rolls designed for culinary preservation, restaurant use, and industrial kitchens.
                 </p>
@@ -388,12 +414,15 @@
             </div>
 
             <!-- Corrugated Boxes -->
-            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
               <div>
-                <div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center mb-6 text-primary-fixed group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-symbols-outlined text-[24px]">inventory_2</span>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mb-6 bg-black/20">
+                  <img src="/corrugated_box_card.png" alt="Corrugated Shipping Boxes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                  <div class="absolute top-3 left-3 w-10 h-10 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center text-primary-fixed">
+                    <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                  </div>
                 </div>
-                <h3 class="text-headline-sm font-headline-md text-white mb-4">Corrugated Shipping Boxes</h3>
+                <h3 class="text-headline-sm font-headline-md text-white mb-3">Corrugated Shipping Boxes</h3>
                 <p class="text-body-md font-body-md text-primary-fixed/80 leading-relaxed mb-6">
                   Durable, robust structural composition engineered to withstand heavy transport loads and protect high-value goods.
                 </p>
@@ -415,12 +444,15 @@
             </div>
 
             <!-- Custom Printing -->
-            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
               <div>
-                <div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center mb-6 text-primary-fixed group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-symbols-outlined text-[24px]">color_lens</span>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mb-6 bg-black/20">
+                  <img src="/printing_card.png" alt="Custom Multi-color Printing" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                  <div class="absolute top-3 left-3 w-10 h-10 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center text-primary-fixed">
+                    <span class="material-symbols-outlined text-[20px]">color_lens</span>
+                  </div>
                 </div>
-                <h3 class="text-headline-sm font-headline-md text-white mb-4">Multi-color Printing</h3>
+                <h3 class="text-headline-sm font-headline-md text-white mb-3">Multi-color Printing</h3>
                 <p class="text-body-md font-body-md text-primary-fixed/80 leading-relaxed mb-6">
                   Upgrade your brand with high-definition custom multi-color prints. Turn functional packaging into powerful brand marketing.
                 </p>
@@ -453,9 +485,13 @@
                   Wholesaler Program
                 </div>
                 <h3 class="text-headline-md md:text-display-lg font-headline-md md:font-display-lg text-white mb-4 tracking-tight">Partner with Guru Kripa Enterprises</h3>
-                <p class="text-body-lg text-primary-fixed/90 max-w-xl leading-relaxed">
+                <p class="text-body-lg text-primary-fixed/90 max-w-xl leading-relaxed mb-8">
                   Join our wholesaler program today to access competitive bulk rates, direct manufacturer pricing, fast custom sizing runs, and dedicated freight solutions. Hum aapko hamesha support karenge!
                 </p>
+                <a href="/GURU_KRIPA_ENTERPRISES_Product_Catalogue.pdf" target="_blank" class="inline-flex items-center bg-white hover:bg-surface-container-low text-primary text-label-md font-label-md font-bold px-8 py-3.5 rounded-full transition-all duration-300 active:scale-95 shadow-md">
+                  <span class="material-symbols-outlined mr-2">picture_as_pdf</span>
+                  View Product Portfolio
+                </a>
               </div>
               <div class="lg:col-span-5 flex flex-col gap-4">
                 <!-- Phone -->
